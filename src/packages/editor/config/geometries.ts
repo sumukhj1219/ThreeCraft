@@ -1,0 +1,80 @@
+export const geometries = [
+  {
+    id: 1,
+    label: 'Sphere Geometry',
+    value: 'SphereGeometry',
+    parameters: [1, 32, 32], 
+  },
+  {
+    id: 2,
+    label: 'Plane Geometry',
+    value: 'PlaneGeometry',
+    parameters: [1, 1],
+  },
+  {
+    id: 3,
+    label: 'Box Geometry',
+    value: 'BoxGeometry',
+    parameters: [1, 1, 1],
+  },
+  {
+    id: 4,
+    label: 'Cylinder Geometry',
+    value: 'CylinderGeometry',
+    parameters: [1, 1, 2, 32],
+  },
+  {
+    id: 5,
+    label: 'Cone Geometry',
+    value: 'ConeGeometry',
+    parameters: [1, 2, 32],
+  },
+  {
+    id: 6,
+    label: 'Torus Geometry',
+    value: 'TorusGeometry',
+    parameters: [1, 0.4, 16, 100], 
+  },
+  {
+    id: 7,
+    label: 'Torus Knot Geometry',
+    value: 'TorusKnotGeometry',
+    parameters: [1, 0.4, 64, 8],
+  },
+  {
+    id: 8,
+    label: 'Circle Geometry',
+    value: 'CircleGeometry',
+    parameters: [1, 32], 
+  },
+  {
+    id: 9,
+    label: 'Ring Geometry',
+    value: 'RingGeometry',
+    parameters: [0.5, 1, 32], 
+  },
+  {
+    id: 10,
+    label: 'Dodecahedron Geometry',
+    value: 'DodecahedronGeometry',
+    parameters: [1, 0], 
+  },
+  {
+    id: 11,
+    label: 'Icosahedron Geometry',
+    value: 'IcosahedronGeometry',
+    parameters: [1, 0], 
+  },
+  {
+    id: 12,
+    label: 'Octahedron Geometry',
+    value: 'OctahedronGeometry',
+    parameters: [1, 0],
+  },
+  {
+    id: 13,
+    label: 'Tetrahedron Geometry',
+    value: 'TetrahedronGeometry',
+    parameters: [1, 0], 
+  },
+];

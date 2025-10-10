@@ -183,3 +183,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Scroll bar */
+.custom-scrollbar {
+  @apply overflow-y-auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f3f4f6; 
+  max-height: 200px; 
+}

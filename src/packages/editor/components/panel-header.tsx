@@ -1,4 +1,3 @@
-import { ChevronDown, VectorSquare } from 'lucide-react'
 import React from 'react'
 import Geometries from './geometries'
 
