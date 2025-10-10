@@ -1,21 +1,23 @@
 import React from 'react'
-import Navbar from './components/navbar'
 import { EditorSection } from '../editor'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { PreviewPage } from '../preview'
 
 const DashboardPage = () => {
   return (
     <div>
       <ResizablePanelGroup direction="horizontal">
-        <ResizablePanel defaultSize={30} minSize={20}>
+        <ResizablePanel defaultSize={25} minSize={20}>
           <EditorSection />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel defaultSize={70} minSize={60}>Two</ResizablePanel>
+        <ResizablePanel defaultSize={75} minSize={60}>
+          <PreviewPage />
+        </ResizablePanel>
       </ResizablePanelGroup>
     </div>
   )

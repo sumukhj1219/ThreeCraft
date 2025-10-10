@@ -18,15 +18,17 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { geometries } from "../config/geometries"
+import { useGeometryContext } from "../context/geometry.context"
 
 
 export default function Geometries() {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
+    const { setActiveGeometry} = useGeometryContext()
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+            <PopoverTrigger asChild className="cursor-pointer">
                 <div className='flex items-center justify-between px-2 h-full text-sm'>
                     <div className='flex items-center gap-x-2'>
                         <VectorSquare className='w-4 h-4' />
@@ -50,6 +52,10 @@ export default function Geometries() {
                                     value={geometry.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
+                                        setActiveGeometry({
+                                            value: geometry.value,
+                                            parameters: geometry.parameters
+                                        })
                                         setOpen(false)
                                     }}
                                 >

@@ -1,5 +1,5 @@
 import React from 'react'
-import Geometries from './geometries'
+import Geometries from '../geometries'
 
 const PanelHeader = () => {
     return (
