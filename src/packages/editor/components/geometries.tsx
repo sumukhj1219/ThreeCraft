@@ -24,7 +24,7 @@ import { useGeometryContext } from "../context/geometry.context"
 export default function Geometries() {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
-    const { setActiveGeometry} = useGeometryContext()
+    const { setActiveGeometries} = useGeometryContext()
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -52,7 +52,7 @@ export default function Geometries() {
                                     value={geometry.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
-                                        setActiveGeometry((prev)=>[...prev,{
+                                        setActiveGeometries((prev:any)=>[...prev,{
                                             value: geometry.value,
                                             parameters: geometry.parameters
                                         }])
