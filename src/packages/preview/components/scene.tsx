@@ -110,20 +110,20 @@ const Scene = () => {
 
     canvasRef.current.addEventListener("click", onClick)
 
-    transformControls.addEventListener("objectChange", () => {
-      if (selectedObject && selectedObjectIndex !== null) {
-        const pos = selectedObject.position;
+    // transformControls.addEventListener("objectChange", () => {
+    //   if (selectedObject && selectedObjectIndex !== null) {
+    //     const pos = selectedObject.position;
+    //     console.log(pos)
+    //     setActiveGeometries(prev => {
+    //       const newState = [...prev];
+    //       const item = { ...newState[selectedObjectIndex] }; 
+    //       item.position = { x: pos.x, y: pos.y, z: pos.z };
+    //       newState[selectedObjectIndex] = item;
+    //       return newState;
+    //     });
+    //   }
+    // });
 
-        setActiveGeometries(prev => {
-          const newState = [...prev];
-          newState[selectedObjectIndex] = {
-            ...newState[selectedObjectIndex],
-            position: { x: pos.x, y: pos.y, z: pos.z }
-          };
-          return newState;
-        });
-      }
-    });
 
     // Animate
     const animate = () => {

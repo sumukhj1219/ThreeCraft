@@ -1,56 +1,55 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-type Vector3 = { x: number, y: number, z: number }
-
-type GeometryType = {
+interface GeometryData {
   value: string;
-  parameters: number[];
-  position?: Vector3;
-  rotation?: Vector3;
-  scale?: Vector3;
-};
+  parameters: any;
+  position?: { x: number; y: number; z: number };
+}
 
-type GeometryContextType = {
-  activeGeometries: GeometryType[];
-  setActiveGeometries: React.Dispatch<React.SetStateAction<GeometryType[]>>;
-};
+interface GeometryContextType {
+  activeGeometries: GeometryData[];
+  setActiveGeometries: React.Dispatch<React.SetStateAction<GeometryData[]>>;
+  clearGeometries: () => void;
+}
 
 const GeometryContext = createContext<GeometryContextType | undefined>(undefined);
 
-export function GeometryProvider({ children }: { children: ReactNode }) {
-  const [activeGeometries, setActiveGeometries] = useState<GeometryType[]>(
-    () => {
-      if (typeof window !== "undefined") {
-        const stored = localStorage.getItem("geometries");
-        if (stored) return JSON.parse(stored) as GeometryType[];
-      }
-      return []
+export const GeometryProvider = ({ children }: { children: React.ReactNode }) => {
+  const [activeGeometries, setActiveGeometries] = useState<GeometryData[]>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("activeGeometries");
+      return saved ? JSON.parse(saved) : [];
     }
-  );
+    return [];
+  });
 
-  const setGeometriesAndStore = (geometries: GeometryType[] | ((prev: GeometryType[]) => GeometryType[])) => {
-    setActiveGeometries(prev => {
-      const newState = typeof geometries === "function" ? geometries(prev) : geometries;
-      if (typeof window !== "undefined") {
-        localStorage.setItem("geometries", JSON.stringify(newState));
-      }
-      return newState;
-    });
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log(activeGeometries)
+      localStorage.setItem("activeGeometries", JSON.stringify(activeGeometries));
+    }
+  }, [activeGeometries]);
+
+  const clearGeometries = () => {
+    setActiveGeometries([]);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("activeGeometries");
+    }
   };
 
   return (
-    <GeometryContext.Provider value={{ activeGeometries, setActiveGeometries: setGeometriesAndStore }}>
+    <GeometryContext.Provider value={{ activeGeometries, setActiveGeometries, clearGeometries }}>
       {children}
     </GeometryContext.Provider>
   );
-}
+};
 
-export function useGeometryContext() {
+export const useGeometryContext = () => {
   const context = useContext(GeometryContext);
   if (!context) {
-    throw new Error("useGeometryContext must be used within a GeometryProvider");
+    throw new Error("useGeometryContext must be used inside GeometryProvider");
   }
   return context;
-}
+};
