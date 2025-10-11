@@ -52,10 +52,10 @@ export default function Geometries() {
                                     value={geometry.value}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
-                                        setActiveGeometry({
+                                        setActiveGeometry((prev)=>[...prev,{
                                             value: geometry.value,
                                             parameters: geometry.parameters
-                                        })
+                                        }])
                                         setOpen(false)
                                     }}
                                 >

@@ -8,14 +8,14 @@ type GeometryType = {
 };
 
 type GeometryContextType = {
-  activeGeometry?: GeometryType;
-  setActiveGeometry: (geometry: GeometryType) => void;
+  activeGeometry: GeometryType[];
+  setActiveGeometry: React.Dispatch<React.SetStateAction<GeometryType[]>>;
 };
 
 const GeometryContext = createContext<GeometryContextType | undefined>(undefined);
 
 export function GeometryProvider({ children }: { children: ReactNode }) {
-  const [activeGeometry, setActiveGeometry] = useState<GeometryType | undefined>(undefined);
+  const [activeGeometry, setActiveGeometry] = useState<GeometryType[]>([]);
 
   return (
     <GeometryContext.Provider value={{ activeGeometry, setActiveGeometry }}>
