@@ -1,6 +1,6 @@
 import OthersTab from "../components/tabs/others-tab";
 import ProjectTab from "../components/tabs/project-tab";
-import SceneTab from "../components/tabs/scene-tab";
+import SceneTab from "../components/tabs/scene/scene-tab";
 import SettingsTab from "../components/tabs/settings-tab";
 
 export const tabs = [

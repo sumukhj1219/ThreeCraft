@@ -1,7 +1,9 @@
 "use client"
 
 import { useGeometryContext } from '@/packages/editor/context/geometry.context'
+import { useSceneContext } from '@/packages/editor/context/scene.context'
 import { useGeometry } from '@/packages/editor/hooks/useGeometry'
+import { useLight } from '@/packages/editor/hooks/useLight'
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -13,10 +15,12 @@ const Scene = () => {
   const sceneRef = useRef<THREE.Scene | null>(null)
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
-  const { activeGeometries, setActiveGeometries } = useGeometryContext()
+  const { activeGeometries } = useGeometryContext()
   const { createGeometry } = useGeometry()
   const [selectedObject, setSelectedObject] = useState<THREE.Mesh | null>(null)
   const [selectedObjectIndex, setSelectedObjectIndex] = useState<number | null>(null);
+  const { color, light } = useSceneContext()
+  const { createLight } = useLight()
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return
@@ -26,9 +30,11 @@ const Scene = () => {
       height: containerRef.current.offsetHeight,
     }
 
+    console.log(color)
+
     // Scene
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color("#f6f3f4")
+    scene.background = new THREE.Color(color)
     sceneRef.current = scene
     scene.fog = new THREE.Fog(
       0xf6f3f4,
@@ -75,9 +81,6 @@ const Scene = () => {
       orbitControls.enabled = !event.value
     })
 
-
-
-
     // Raycaster for object selection
     const raycaster = new THREE.Raycaster()
     const pointer = new THREE.Vector2()
@@ -106,7 +109,6 @@ const Scene = () => {
         transformControls.detach();
       }
     };
-
 
     canvasRef.current.addEventListener("click", onClick)
 
@@ -148,7 +150,7 @@ const Scene = () => {
       canvasRef.current?.removeEventListener("click", onClick)
       renderer.dispose()
     }
-  }, [])
+  }, [color])
 
   // Add geometry meshes
   useEffect(() => {
@@ -173,7 +175,23 @@ const Scene = () => {
       sceneRef.current!.add(mesh);
     });
 
-  }, [activeGeometries])
+    // Lights
+    if (light) {
+      const lighting = createLight(light)
+
+      if (lighting) {
+        sceneRef.current!.children
+          .filter(obj => (obj as any).isLight)
+          .forEach(oldLight => sceneRef.current!.remove(oldLight))
+
+        sceneRef.current!.add(lighting)
+      }
+    }
+
+    console.log(sceneRef.current)
+
+
+  }, [activeGeometries, light])
 
 
   return (
