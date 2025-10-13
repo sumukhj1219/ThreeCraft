@@ -49,7 +49,7 @@ export const lights = [
         label: "Rect Area Light",
         value: "RectAreaLight",
         color: "#ffffff",
-        intensity: 5,
+        intensity: 1,
         width: 10,
         height: 10,
         position: { x: 2, y: 2, z: 0 }

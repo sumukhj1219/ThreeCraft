@@ -8,5 +8,7 @@ export type Light = {
     angle?: number;
     penumbra?: number;
     decay?: number;
-    position?: { x: number, y: number, z: number }
+    width?:number;
+    height?:number;
+    position?: { x?: number, y?: number, z?: number }
 }

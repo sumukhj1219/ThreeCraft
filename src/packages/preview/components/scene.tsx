@@ -160,7 +160,7 @@ const Scene = () => {
       if (sceneRef.current!.getObjectByName(`geo-${index}`)) return;
 
       const geometry = createGeometry(geo.value, geo.parameters);
-      const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+      const material = new THREE.MeshStandardMaterial({ side: THREE.DoubleSide, metalness:1, roughness:0.3 });
       const mesh = new THREE.Mesh(geometry, material);
 
       mesh.userData.index = index;

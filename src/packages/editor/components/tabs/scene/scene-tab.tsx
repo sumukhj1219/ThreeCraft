@@ -25,13 +25,13 @@ const SceneTab = () => {
         </Accordion>
       </div>
 
-      <div className="border rounded-lg w-full">
-        <Accordion type="single" collapsible defaultValue="scene-light" className="w-full">
+      <div className="border rounded-lg w-full ">
+        <Accordion type="single" collapsible defaultValue="scene-light" className="w-full ">
           <AccordionItem value="scene-light">
             <AccordionTrigger className="px-3 py-3">
               Scene Lighting
             </AccordionTrigger>
-            <AccordionContent className="px-3 py-3 flex flex-col">
+            <AccordionContent className="px-3 py-3 flex flex-col ">
               <LightsSelector />
               <LightEditor />
             </AccordionContent>
